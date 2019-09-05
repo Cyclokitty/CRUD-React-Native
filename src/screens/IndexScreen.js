@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import { Context as BlogContext } from '../context/BlogContext';
 
 const IndexScreen = () => {
-    const { state, addBlogPost } = useContext(BlogContext);
+    const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext);
 
     return (
         <View style={styles.container}>
@@ -17,7 +17,7 @@ const IndexScreen = () => {
                     return  <View style={styles.listStyle}>
                         <Text style={styles.listStyleText}>{item.title}</Text>
                         <TouchableOpacity
-                            onPress={() => console.log(item.id)}
+                            onPress={() => deleteBlogPost(item.id)}
                         >
                             <Icon 
                                 name='trash'
@@ -28,7 +28,7 @@ const IndexScreen = () => {
                         </TouchableOpacity>
                     </View>
                 }}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
             />
         </View>
     )
