@@ -1,15 +1,21 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import BlogContext from '../context/BlogContext';
 
 const IndexScreen = () => {
-    const value = useContext(BlogContext);
+    const blogPosts = useContext(BlogContext);
 
     return (
         <View style={styles.container}>
             <Text style={styles.titleText}>CRUD</Text>
             <Text style={styles.subTitleText}>Blog Maker App Thingy</Text>
-            <Text>The value from provider: {value}</Text>
+            <FlatList 
+                data={blogPosts}
+                renderItem={({item}) => {
+                    return <Text style={styles.listStyleItem}>{item.title}</Text>
+                }}
+                keyExtractor={(item) => item.title}
+            />
         </View>
     )
 };
@@ -18,6 +24,7 @@ const IndexScreen = () => {
     container: {
         flex: 1,
         backgroundColor: '#FFFFEF',
+        padding: 5,
     }, 
     titleText: {
         color: '#6761A8',
@@ -30,6 +37,13 @@ const IndexScreen = () => {
         fontSize: 18,
         alignSelf: 'center',
         fontWeight: 'bold',
+    },
+    listStyleItem: {
+        fontSize: 16,
+        borderWidth: 1,
+        borderColor: '#F26430',
+        padding: 10,
+        color: '#2A2D34'
     }
 });
 
