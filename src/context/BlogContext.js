@@ -2,8 +2,10 @@ import React from 'react';
 
 const BlogContext = React.createContext();
 
-const BlogProvider = ({ children }) => {
-    return <BlogContext.Provider>
+export const BlogProvider = ({ children }) => {
+    return <BlogContext.Provider value='Laura is awesome!'>
         {children}
     </BlogContext.Provider>;
 };
+
+export default BlogContext;
