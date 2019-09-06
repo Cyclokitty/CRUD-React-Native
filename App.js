@@ -13,7 +13,14 @@ const navigator = createStackNavigator({
 }, {
     initialRouteName: 'Index',
     defaultNavigationOptions: {
-        title: 'Blog List'
+        title: 'Blog List',
+        headerStyle: {
+          backgroundColor: '#fff',
+        },
+        headerTintColor: '#6761A8',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        }
     }
 });
 
