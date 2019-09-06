@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Context as BlogContext } from '../context/BlogContext';
+import { withNavigation } from 'react-navigation';
 
-const IndexScreen = () => {
+
+const IndexScreen = ({ navigation }) => {
     const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext);
 
     return (
@@ -14,8 +16,19 @@ const IndexScreen = () => {
             <FlatList 
                 data={state}
                 renderItem={({item}) => {
-                    return  <View style={styles.listStyle}>
-                        <Text style={styles.listStyleText}>{item.title}</Text>
+                    return  (
+                    
+                    <View style={styles.listStyle}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate('Show', {
+                                    id: item.id,
+                                })
+                            }}
+                        >
+                            <Text style={styles.listStyleText}>{item.title}</Text>
+                        </TouchableOpacity>
+                        
                         <TouchableOpacity
                             onPress={() => deleteBlogPost(item.id)}
                         >
@@ -26,7 +39,7 @@ const IndexScreen = () => {
                                 color='#009B72'
                             />
                         </TouchableOpacity>
-                    </View>
+                    </View>)
                 }}
                 keyExtractor={(item) => item.id.toString()}
             />
@@ -34,7 +47,22 @@ const IndexScreen = () => {
     )
 };
 
-    const styles = StyleSheet.create({
+IndexScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerRight:
+        <TouchableOpacity
+            onPress={() => navigation.navigate('Create')}>
+            <Icon 
+            name='plus' 
+            size={30} 
+            type='foundation' 
+            color='#009B72' 
+            style={styles.iconStyle}/>
+        </TouchableOpacity>        
+    };
+};
+
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFF',
@@ -63,6 +91,9 @@ const IndexScreen = () => {
         fontSize: 20,
         color: '#2A2D34'
     },
+    iconStyle: {
+        marginRight: 15
+    }
 });
 
-export default IndexScreen;
+export default withNavigation(IndexScreen);
