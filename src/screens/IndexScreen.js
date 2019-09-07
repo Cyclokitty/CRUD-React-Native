@@ -49,16 +49,17 @@ const IndexScreen = ({ navigation }) => {
 
 IndexScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerRight:
-        <TouchableOpacity
-            onPress={() => navigation.navigate('Create')}>
-            <Icon 
-            name='plus' 
-            size={30} 
-            type='foundation' 
-            color='#009B72' 
-            style={styles.iconStyle}/>
-        </TouchableOpacity>        
+        headerRight: (
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Create')}>
+                <Icon 
+                name='plus' 
+                size={30} 
+                type='foundation' 
+                color='#009B72' 
+                style={styles.iconStyle}/>
+            </TouchableOpacity>   
+        )     
     };
 };
 
