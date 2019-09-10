@@ -6,8 +6,9 @@ const blogReducer = (state, action) => {
             return [
                 ...state, 
                 {
-                    title: `Blog Post`, 
-                    id: Date.now()
+                    id: Date.now(),
+                    title: action.payload.title,
+                    content: action.payload.content,                     
                 }
             ]; 
         case 'delete_blogpost' :
@@ -18,8 +19,9 @@ const blogReducer = (state, action) => {
 };
 
 const addBlogPost = (dispatch) => {
-    return () => {
-        dispatch ({type: 'add_blogpost'});
+    return (title, content, callback) => {
+        dispatch ({type: 'add_blogpost', payload: { title, content }});
+        callback();
     };   
 }
 

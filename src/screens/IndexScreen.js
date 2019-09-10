@@ -1,18 +1,15 @@
 import React, { useContext } from 'react';
-import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Context as BlogContext } from '../context/BlogContext';
 import { withNavigation } from 'react-navigation';
 
 
 const IndexScreen = ({ navigation }) => {
-    const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext);
+    const { state, deleteBlogPost } = useContext(BlogContext);
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>CRUD</Text>
-            <Text style={styles.subTitleText}>Blog Maker App Thingy</Text>
-            <Button title='Add Post' onPress={addBlogPost} />
             <FlatList 
                 data={state}
                 renderItem={({item}) => {
@@ -69,18 +66,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         padding: 5,
     }, 
-    titleText: {
-        color: '#6761A8',
-        fontSize: 24,
-        alignSelf: 'center',
-        fontWeight: 'bold',
-    },
-    subTitleText: {
-        color: '#6761A8',
-        fontSize: 18,
-        alignSelf: 'center',
-        fontWeight: 'bold',
-    },
     listStyle: {   
         flexDirection: 'row',
         justifyContent: 'space-around',

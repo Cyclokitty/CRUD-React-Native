@@ -6,7 +6,7 @@ const CreateScreen = ({ navigation }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    const { state } = useContext(Context);
+    const { addBlogPost } = useContext(Context);
 
     
     
@@ -26,7 +26,11 @@ const CreateScreen = ({ navigation }) => {
                 style={styles.inputContent}
             />
             <TouchableOpacity
-                onPress={() => console.log(`${title}, ${content}`)}
+                onPress={() => {
+                    addBlogPost(title, content, () => {
+                        navigation.navigate('Index');
+                    });
+                }}
                 style={styles.saveBtn}
             >
                 <Text style={styles.saveBtnText}>Save!</Text>
