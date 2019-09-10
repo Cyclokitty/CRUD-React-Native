@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { Context } from '../context/BlogContext';
 
 const ShowScreen = ({ navigation }) => {
@@ -13,6 +14,22 @@ const ShowScreen = ({ navigation }) => {
             <Text style={styles.content}>{blogPost.content}</Text>
         </View>
     )
+};
+
+ShowScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerRight: (
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Edit')}>
+                <Icon 
+                name='pencil' 
+                size={30} 
+                type='foundation' 
+                color='#009B72' 
+                style={styles.iconStyle}/>
+            </TouchableOpacity>   
+        )     
+    };
 };
 
 const styles = StyleSheet.create({
