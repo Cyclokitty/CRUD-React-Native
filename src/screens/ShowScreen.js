@@ -20,7 +20,9 @@ ShowScreen.navigationOptions = ({ navigation }) => {
     return {
         headerRight: (
             <TouchableOpacity
-                onPress={() => navigation.navigate('Edit')}>
+                onPress={() => navigation.navigate('Edit', {
+                    id: navigation.getParam('id')
+                })}>
                 <Icon 
                 name='pencil' 
                 size={30} 

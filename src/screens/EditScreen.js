@@ -1,11 +1,18 @@
-import React from 'react';
-import { StyleSheet,Text, TouchableOpacity,  View} from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity,  View} from 'react-native';
 import { Context } from '../context/BlogContext';
 
-const EditScreen = () => {
+const EditScreen = ({ navigation }) => {
+    const { state } = useContext(Context);
+    const blogPost = state.find(blogPost => blogPost.id === navigation.getParam('id'));
+    
+
     return(
         <View style={styles.container}>
-            <Text style={styles.title}>Edit Screen</Text>
+            <TextInput style={styles.title}
+                value={blogPost.title} />
+            <TextInput style={styles.content}
+                value={blogPost.content} />
         </View>
     );
 };
