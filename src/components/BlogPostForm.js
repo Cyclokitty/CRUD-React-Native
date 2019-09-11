@@ -1,19 +1,19 @@
 import React,  { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const BlogPostForm = () => {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+const BlogPostForm = ({ initialValues, label, onSubmit }) => {
+    const [title, setTitle] = useState(initialValues.title);
+    const [content, setContent] = useState(initialValues.content);
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Enter Title:</Text>
+            <Text style={styles.title}>{label} Title:</Text>
             <TextInput 
                 onChangeText={(text) => setTitle(text)}
                 value={title}
                 style={styles.inputTitle}
             />
-            <Text style={styles.title}>Enter Content:</Text>
+            <Text style={styles.title}>{label} Content:</Text>
             <TextInput
                 onChangeText={(text) => setContent(text)}
                 value={content}
@@ -22,7 +22,7 @@ const BlogPostForm = () => {
             />
             <TouchableOpacity
                 onPress={() => {
-                    
+                    onSubmit(title, content)
                 }}
                 style={styles.saveBtn}
             >
