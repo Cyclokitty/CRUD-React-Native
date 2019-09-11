@@ -32,6 +32,13 @@ const BlogPostForm = ({ initialValues, label, onSubmit }) => {
     )
 }
 
+BlogPostForm.defaultProps = {
+    initialValues: {
+        title: '',
+        content: ''
+    }
+};
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
