@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Context as BlogContext } from '../context/BlogContext';
@@ -6,7 +6,11 @@ import { withNavigation } from 'react-navigation';
 
 
 const IndexScreen = ({ navigation }) => {
-    const { state, deleteBlogPost } = useContext(BlogContext);
+    const { state, deleteBlogPost, getBlogPosts } = useContext(BlogContext);
+
+    useEffect(() => {
+        getBlogPosts();
+    }, []); 
 
     return (
         <View style={styles.container}>

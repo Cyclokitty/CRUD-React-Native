@@ -1,4 +1,5 @@
 import createDataContext from './createDataContext';
+import jsonServer from '../api/jsonServer';
 
 const blogReducer = (state, action) => {
     switch(action.type) {
@@ -19,9 +20,19 @@ const blogReducer = (state, action) => {
                 ? action.payload 
                 : blogPost;                
             });
+            case 'get_blogposts':
+                return action.payload;
         default: 
             return state;
     }
+};
+
+const getBlogPosts = (dispatch) => {
+    return async () => {
+        const response = await jsonServer.get('/blogposts');
+
+        dispatch({ type: 'get_blogposts', payload: response.data });
+    };
 };
 
 const addBlogPost = (dispatch) => {
@@ -31,13 +42,13 @@ const addBlogPost = (dispatch) => {
             callback();
         }        
     };   
-}
+};
 
 const deleteBlogPost = (dispatch) => {
     return (id) => {
         dispatch({type: 'delete_blogpost', payload: id });
     }
-}
+};
 
 const editBlogPost = (dispatch) => {
     return (id, title, content, callback) => {
@@ -46,10 +57,10 @@ const editBlogPost = (dispatch) => {
             callback();
         } 
     };
-}
+};
 
 export const { Context, Provider } = createDataContext(
     blogReducer,
-    { addBlogPost, deleteBlogPost, editBlogPost },
-    [{ title: 'I like cheese', content: 'Cheddar, Mozzarella, Havarti, Gouda', id: Date.now() }]
+    { addBlogPost, deleteBlogPost, editBlogPost, getBlogPosts },
+    []
 );
