@@ -15,12 +15,7 @@ const CreateScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FFF',
-        padding: 5,
-    },
-    
+
 });
 
 export default CreateScreen;
